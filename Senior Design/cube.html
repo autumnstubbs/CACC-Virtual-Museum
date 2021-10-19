@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>CACC Virtual Museum</title>
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="js/three.js"></script>
+	<script>
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
+
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		const makePlane = new THREE.PlaneGeometry(100, 100);
+
+		const ceiling = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0xCC0000 })); //red
+		ceiling.position.y = 100;
+		ceiling.rotateX(Math.PI / 2);
+		scene.add(ceiling);
+
+		const floor = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0x828282})); //grey
+		floor.rotateX(-Math.PI / 2);
+		scene.add(floor);
+
+		const wallBack = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0x7f7fff})); //blue
+		wallBack.position.z = -50;
+		wallBack.position.y = 50;
+		scene.add(wallBack);
+
+		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0x6AA84F})); //green
+		wallRight.position.x = 50;
+		wallRight.position.y = 50;
+		wallRight.rotateY(-Math.PI / 2);
+		scene.add(wallRight);
+
+		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0xFFFF00})); //yellow
+		wallLeft.position.x = -50;
+		wallLeft.position.y = 50;
+		wallLeft.rotateY(Math.PI / 2);
+		scene.add(wallLeft);
+
+		camera.position.set( 0, 55, 150 );
+
+		const animate = function () {
+			requestAnimationFrame(animate);
+			renderer.render(scene, camera);
+		};
+
+		animate();
+	</script>
+</body>
+
+</html>
