@@ -15,41 +15,52 @@
 	<script src="js/three.js"></script>
 	<script>
 		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
+		const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .1, 1000);
 
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 
-		const makePlane = new THREE.PlaneGeometry(100, 100);
+		//wallpapers
+		textureBack = THREE.ImageUtils.loadTexture( "../loaders/museBack.jpg" );
+		textureSide = THREE.ImageUtils.loadTexture( "../loaders/museSides.jpg" );
+		textureFloor = THREE.ImageUtils.loadTexture( "../loaders/wood.jpg" );
+		textureCeiling = THREE.ImageUtils.loadTexture( "../loaders/ceiling.jpg" );
 
-		const ceiling = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0xCC0000 })); //red
+		const makePlane = new THREE.PlaneGeometry(100, 100);
+		const makePlaneWide = new THREE.PlaneGeometry(150, 100);
+
+		const ceiling = new THREE.Mesh(makePlaneWide, new THREE.MeshLambertMaterial({ color : 0xD0B86F })); //tan
 		ceiling.position.y = 100;
 		ceiling.rotateX(Math.PI / 2);
 		scene.add(ceiling);
 
-		const floor = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0x828282})); //grey
+		const floor = new THREE.Mesh(makePlaneWide, new THREE.MeshLambertMaterial({ map : textureFloor })); //grey
 		floor.rotateX(-Math.PI / 2);
 		scene.add(floor);
 
-		const wallBack = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0x7f7fff})); //blue
+		const wallBack = new THREE.Mesh(makePlaneWide, new THREE.MeshLambertMaterial({ map : textureBack })); //blue
 		wallBack.position.z = -50;
 		wallBack.position.y = 50;
 		scene.add(wallBack);
 
-		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0x6AA84F})); //green
-		wallRight.position.x = 50;
+		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map : textureSide })); //white
+		wallRight.position.x = 75;
 		wallRight.position.y = 50;
 		wallRight.rotateY(-Math.PI / 2);
 		scene.add(wallRight);
 
-		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshBasicMaterial({color: 0xFFFF00})); //yellow
-		wallLeft.position.x = -50;
+		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map : textureSide })); //white
+		wallLeft.position.x = -75;
 		wallLeft.position.y = 50;
 		wallLeft.rotateY(Math.PI / 2);
 		scene.add(wallLeft);
 
-		camera.position.set( 0, 55, 150 );
+		const light = new THREE.AmbientLight(0x404040, 4);
+		scene.add(light);
+
+
+		camera.position.set(0, 55, 150);
 
 		const animate = function () {
 			requestAnimationFrame(animate);
