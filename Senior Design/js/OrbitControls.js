@@ -1291,4 +1291,4 @@ class MapControls extends OrbitControls {
 
 }
 
-export { MapControls };
+export { OrbitControls, MapControls };
