@@ -1,0 +1,2 @@
+Once the map layout is approved, this map will be replaced with a better looking one.
+Also, the html pages will be replaces with the actual rooms.
