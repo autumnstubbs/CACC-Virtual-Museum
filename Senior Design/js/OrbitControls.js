@@ -6,7 +6,7 @@ import {
 	TOUCH,
 	Vector2,
 	Vector3
-} from '../../../build/three.module.js';
+} from './three.module.js';
 
 // This set of controls performs orbiting, dollying (zooming), and panning.
 // Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
@@ -121,7 +121,6 @@ class OrbitControls extends EventDispatcher {
 		};
 
 		this.listenToKeyEvents = function ( domElement ) {
-
 			domElement.addEventListener( 'keydown', onKeyDown );
 			this._domElementKeyEvents = domElement;
 
@@ -1291,4 +1290,4 @@ class MapControls extends OrbitControls {
 
 }
 
-export { MapControls };
+export { OrbitControls, MapControls };

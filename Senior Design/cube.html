@@ -12,8 +12,15 @@
 </head>
 
 <body>
-	<script src="js/three.js"></script>
-	<script>
+	<script src="js/three.js" type="module"></script>
+	<script src="js/OrbitControls.js" type="module"></script>
+	<script src="js/FirstPersonControls.js" type="module"></script>
+	<script type="module">
+		import * as THREE from './js/three.module.js';
+		import {OrbitControls, MapControls} from './js/OrbitControls.js';
+		import {FirstPersonControls} from './js/FirstPersonControls.js';
+
+		const clock = new THREE.Clock();
 		const scene = new THREE.Scene();
 		const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .1, 1000);
 
@@ -21,11 +28,23 @@
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 
+		// OrbitControls
+		const controls = new OrbitControls(camera, renderer.domElement);
+		controls.update();
+		controls.enablePan = false;
+		controls.enableDamping = true;
+
+		// First Person controls
+		const firstPersonControls = new FirstPersonControls(camera, document);
+		firstPersonControls.movementSpeed = 100;
+		firstPersonControls.lookSpeed = 0.1;
+
+
 		//wallpapers
-		textureBack = THREE.ImageUtils.loadTexture( "../loaders/museBack.jpg" );
-		textureSide = THREE.ImageUtils.loadTexture( "../loaders/museSides.jpg" );
-		textureFloor = THREE.ImageUtils.loadTexture( "../loaders/wood.jpg" );
-		textureCeiling = THREE.ImageUtils.loadTexture( "../loaders/ceiling.jpg" );
+		const textureBack = THREE.ImageUtils.loadTexture( "../loaders/museBack.jpg" );
+		const textureSide = THREE.ImageUtils.loadTexture( "../loaders/museSides.jpg" );
+		const textureFloor = THREE.ImageUtils.loadTexture( "../loaders/wood.jpg" );
+		const textureCeiling = THREE.ImageUtils.loadTexture( "../loaders/ceiling.jpg" );
 
 		const makePlane = new THREE.PlaneGeometry(100, 100);
 		const makePlaneWide = new THREE.PlaneGeometry(150, 100);
@@ -62,11 +81,24 @@
 
 		camera.position.set(0, 55, 150);
 
-		const animate = function () {
-			requestAnimationFrame(animate);
-			renderer.render(scene, camera);
+		window.onresize = function () {
+
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			firstPersonControls.handleResize();
+
 		};
 
+
+		const animate = function () {
+			requestAnimationFrame(animate);
+			controls.update();
+			firstPersonControls.update( clock.getDelta() );
+			renderer.render(scene, camera);
+		};
+		
 		animate();
 	</script>
 </body>
