@@ -38,29 +38,35 @@
 	<div id="blocker">
 		<div id="instructions">
 			<p style="font-size:36px">
-				Click to enter our Virtual Museum
+				Click to begin our Virtual Museum Tour
 			</p>
 			<p>
 				Move: WASD<br/>
 				Look: MOUSE<br/>
-				Press ESC to come out 
+				Start Panorama: P<br/>
+				End Panorama: Q<br/>
+				Press ESC to end Virtual Museum Tour
 			</p>
 		</div>
 	</div>
 
 	<script src="js/three.js" type="module"></script>
-	<script src="js/OrbitControls.js" type="module"></script>
 	<script src="js/PointerLockControls.js" type="module"></script>
 	<script type="module">
 		import * as THREE from './js/three.module.js';
-		import {OrbitControls, MapControls} from './js/OrbitControls.js';
 		import { PointerLockControls } from './js/PointerLockControls.js';
 
+		// Panorama variables
+		let lat = 0, lon = 0, phi = 0, theta = 0;
+		let panoramaMode = false;
+
+		// Flags to check in which direction to move based on keyboard events
 		let moveForward = false;
 		let moveBackward = false;
 		let moveLeft = false;
 		let moveRight = false;
-					
+
+		// Track the movement of a player through following variables		
 		let prevTime = performance.now();
 		const velocity = new THREE.Vector3();
 		const direction = new THREE.Vector3();
@@ -72,14 +78,7 @@
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 
-/* BECAUSE BOTH ORBITCONTROLS AND POINTERLOCKCONTROLS USE MOUSE EVENTS, WE CAN USE ONLY ONE 
-		// OrbitControls
-		const controls = new OrbitControls(camera, renderer.domElement);
-		controls.update();
-		controls.enablePan = false;
-		controls.enableDamping = true;
-*/
-		// Pointer Lock controls
+		// Pointer Lock controls(for keyboard events + looking around through mouse events)
 		const pointerLockControls = new PointerLockControls(camera, document.body);
 		const blocker = document.getElementById( 'blocker' );
 		const instructions = document.getElementById( 'instructions' );
@@ -126,6 +125,13 @@
 				case 'ArrowRight':
 				case 'KeyD':
 					moveRight = true;
+					break;
+				
+				case 'KeyP':
+					panoramaMode = true;
+					break;
+				case 'KeyQ':
+					panoramaMode = false;
 					break;
 			}
 		};
@@ -210,41 +216,62 @@
 
 		};
 
-
 		const animate = function () {
 			requestAnimationFrame(animate);
-			// controls.update();
 
 			const time = performance.now();
 
-			if(pointerLockControls.isLocked === true ){
-				const delta = ( time - prevTime ) / 1000;
+			// Start the panorama
+			if(panoramaMode){
+				lon += 0.1;
+				lat = Math.max( - 85, Math.min( 85, lat ) );
+				phi = THREE.MathUtils.degToRad( 90 - lat );
+				theta = THREE.MathUtils.degToRad( lon );
 
-				velocity.x -= velocity.x * 10.0 * delta;
-				velocity.z -= velocity.z * 10.0 * delta;
+				const x = 500 * Math.sin( phi ) * Math.cos( theta );
+				const y = 500 * Math.cos( phi );
+				const z = 500 * Math.sin( phi ) * Math.sin( theta );
 
-				velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
-
-				direction.z = Number( moveForward ) - Number( moveBackward );
-				direction.x = Number( moveRight ) - Number( moveLeft );
-				direction.normalize(); // this ensures consistent movements in all directions
-
-				if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
-				if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
-
-				pointerLockControls.moveRight( - velocity.x * delta );
-				pointerLockControls.moveForward( - velocity.z * delta );
-
-				pointerLockControls.getObject().position.y += ( velocity.y * delta ); // new behavior
-
-				if ( pointerLockControls.getObject().position.y < 10 ) {
-
-					velocity.y = 0;
-					pointerLockControls.getObject().position.y = 10;
-				}
+				camera.lookAt( x, y, z );
 			}
 
-			prevTime = time;
+			// End the panorama and listen for other keyboard events
+			else{
+			
+				lon = 0;
+				lat = 0;
+				phi = 0;
+				theta = 0;
+			
+				if(pointerLockControls.isLocked === true ){
+					const delta = ( time - prevTime ) / 1000;
+
+					velocity.x -= velocity.x * 10.0 * delta;
+					velocity.z -= velocity.z * 10.0 * delta;
+
+					velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+
+					direction.z = Number( moveForward ) - Number( moveBackward );
+					direction.x = Number( moveRight ) - Number( moveLeft );
+					direction.normalize(); // this ensures consistent movements in all directions
+
+					if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
+					if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
+
+					pointerLockControls.moveRight( - velocity.x * delta );
+					pointerLockControls.moveForward( - velocity.z * delta );
+
+					pointerLockControls.getObject().position.y += ( velocity.y * delta ); // new behavior
+
+					if ( pointerLockControls.getObject().position.y < 10 ) {
+
+						velocity.y = 0;
+						pointerLockControls.getObject().position.y = 10;
+					}
+				}
+
+				prevTime = time;
+			}
 			renderer.render(scene, camera);
 		}
 		
