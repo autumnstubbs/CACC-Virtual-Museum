@@ -8,19 +8,63 @@
 		body {
 			margin: 0;
 		}
+				
+		#blocker {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255,255,255,0.5);
+		}
+
+		#instructions {
+			width: 100%;
+			height: 100%;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			text-align: center;
+			font-size: 14px;
+			cursor: pointer;
+		}
+	
+
 	</style>
 </head>
 
 <body>
+	<div id="blocker">
+		<div id="instructions">
+			<p style="font-size:36px">
+				Click to enter our Virtual Museum
+			</p>
+			<p>
+				Move: WASD<br/>
+				Look: MOUSE<br/>
+				Press ESC to come out 
+			</p>
+		</div>
+	</div>
+
 	<script src="js/three.js" type="module"></script>
 	<script src="js/OrbitControls.js" type="module"></script>
-	<script src="js/FirstPersonControls.js" type="module"></script>
+	<script src="js/PointerLockControls.js" type="module"></script>
 	<script type="module">
 		import * as THREE from './js/three.module.js';
 		import {OrbitControls, MapControls} from './js/OrbitControls.js';
-		import {FirstPersonControls} from './js/FirstPersonControls.js';
+		import { PointerLockControls } from './js/PointerLockControls.js';
 
-		const clock = new THREE.Clock();
+		let moveForward = false;
+		let moveBackward = false;
+		let moveLeft = false;
+		let moveRight = false;
+					
+		let prevTime = performance.now();
+		const velocity = new THREE.Vector3();
+		const direction = new THREE.Vector3();
+
 		const scene = new THREE.Scene();
 		const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .1, 1000);
 
@@ -28,17 +72,93 @@
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 
+/* BECAUSE BOTH ORBITCONTROLS AND POINTERLOCKCONTROLS USE MOUSE EVENTS, WE CAN USE ONLY ONE 
 		// OrbitControls
 		const controls = new OrbitControls(camera, renderer.domElement);
 		controls.update();
 		controls.enablePan = false;
 		controls.enableDamping = true;
+*/
+		// Pointer Lock controls
+		const pointerLockControls = new PointerLockControls(camera, document.body);
+		const blocker = document.getElementById( 'blocker' );
+		const instructions = document.getElementById( 'instructions' );
 
-		// First Person controls
-		const firstPersonControls = new FirstPersonControls(camera, document);
-		firstPersonControls.movementSpeed = 100;
-		firstPersonControls.lookSpeed = 0.1;
+		instructions.addEventListener( 'click', function () {
 
+			pointerLockControls.lock();
+
+		} );
+
+		pointerLockControls.addEventListener( 'lock', function () {
+
+			instructions.style.display = 'none';
+			blocker.style.display = 'none';
+
+		} );
+
+		pointerLockControls.addEventListener( 'unlock', function () {
+
+			blocker.style.display = 'block';
+			instructions.style.display = '';
+
+		} );
+
+		scene.add(pointerLockControls.getObject());
+
+		const onKeyDown = function ( event ) {
+			switch ( event.code ) {
+				case 'ArrowUp':
+				case 'KeyW':
+					moveForward = true;
+					break;
+				
+				case 'ArrowLeft':
+				case 'KeyA':
+					moveLeft = true;
+					break;
+
+				case 'ArrowDown':
+				case 'KeyS':
+					moveBackward = true;
+					break;
+
+				case 'ArrowRight':
+				case 'KeyD':
+					moveRight = true;
+					break;
+			}
+		};
+		
+		const onKeyUp = function ( event ) {
+
+			switch ( event.code ) {
+
+				case 'ArrowUp':
+				case 'KeyW':
+					moveForward = false;
+					break;
+
+				case 'ArrowLeft':
+				case 'KeyA':
+					moveLeft = false;
+					break;
+
+				case 'ArrowDown':
+				case 'KeyS':
+					moveBackward = false;
+					break;
+
+				case 'ArrowRight':
+				case 'KeyD':
+					moveRight = false;
+					break;
+
+			}
+
+		};
+		document.addEventListener( 'keydown', onKeyDown );
+		document.addEventListener( 'keyup', onKeyUp );
 
 		//wallpapers
 		const textureBack = THREE.ImageUtils.loadTexture( "../loaders/museBack.jpg" );
@@ -87,17 +207,46 @@
 			camera.updateProjectionMatrix();
 
 			renderer.setSize( window.innerWidth, window.innerHeight );
-			firstPersonControls.handleResize();
 
 		};
 
 
 		const animate = function () {
 			requestAnimationFrame(animate);
-			controls.update();
-			firstPersonControls.update( clock.getDelta() );
+			// controls.update();
+
+			const time = performance.now();
+
+			if(pointerLockControls.isLocked === true ){
+				const delta = ( time - prevTime ) / 1000;
+
+				velocity.x -= velocity.x * 10.0 * delta;
+				velocity.z -= velocity.z * 10.0 * delta;
+
+				velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+
+				direction.z = Number( moveForward ) - Number( moveBackward );
+				direction.x = Number( moveRight ) - Number( moveLeft );
+				direction.normalize(); // this ensures consistent movements in all directions
+
+				if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
+				if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
+
+				pointerLockControls.moveRight( - velocity.x * delta );
+				pointerLockControls.moveForward( - velocity.z * delta );
+
+				pointerLockControls.getObject().position.y += ( velocity.y * delta ); // new behavior
+
+				if ( pointerLockControls.getObject().position.y < 10 ) {
+
+					velocity.y = 0;
+					pointerLockControls.getObject().position.y = 10;
+				}
+			}
+
+			prevTime = time;
 			renderer.render(scene, camera);
-		};
+		}
 		
 		animate();
 	</script>
