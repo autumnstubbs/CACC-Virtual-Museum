@@ -172,30 +172,31 @@
 		const textureFloor = THREE.ImageUtils.loadTexture( "../loaders/wood.jpg" );
 		const textureCeiling = THREE.ImageUtils.loadTexture( "../loaders/ceiling.jpg" );
 
-		const makePlane = new THREE.PlaneGeometry(100, 100);
-		const makePlaneWide = new THREE.PlaneGeometry(150, 100);
+		const makePlane = new THREE.PlaneGeometry(300, 100);
+		const makePlaneBack = new THREE.PlaneGeometry(150, 100);
+		const makePlaneFloor = new THREE.PlaneGeometry(150, 300);
 
-		const ceiling = new THREE.Mesh(makePlaneWide, new THREE.MeshLambertMaterial({ color : 0xD0B86F })); //tan
+		const ceiling = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ color: 0xD0B86F })); //tan
 		ceiling.position.y = 100;
 		ceiling.rotateX(Math.PI / 2);
 		scene.add(ceiling);
 
-		const floor = new THREE.Mesh(makePlaneWide, new THREE.MeshLambertMaterial({ map : textureFloor })); //grey
+		const floor = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureFloor })); //grey
 		floor.rotateX(-Math.PI / 2);
 		scene.add(floor);
 
-		const wallBack = new THREE.Mesh(makePlaneWide, new THREE.MeshLambertMaterial({ map : textureBack })); //blue
-		wallBack.position.z = -50;
+		const wallBack = new THREE.Mesh(makePlaneBack, new THREE.MeshLambertMaterial({ map: textureBack })); //blue
+		wallBack.position.z = -100;
 		wallBack.position.y = 50;
 		scene.add(wallBack);
 
-		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map : textureSide })); //white
+		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSide })); //white
 		wallRight.position.x = 75;
 		wallRight.position.y = 50;
 		wallRight.rotateY(-Math.PI / 2);
 		scene.add(wallRight);
 
-		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map : textureSide })); //white
+		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSide })); //white
 		wallLeft.position.x = -75;
 		wallLeft.position.y = 50;
 		wallLeft.rotateY(Math.PI / 2);
