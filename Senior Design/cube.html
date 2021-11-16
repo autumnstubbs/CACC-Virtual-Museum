@@ -176,7 +176,7 @@
 		const makePlaneBack = new THREE.PlaneGeometry(150, 100);
 		const makePlaneFloor = new THREE.PlaneGeometry(150, 300);
 
-		const ceiling = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ color: 0xD0B86F }));
+		const ceiling = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureCeiling }));
 		ceiling.position.y = 100;
 		ceiling.rotateX(Math.PI / 2);
 		scene.add(ceiling);
