@@ -176,27 +176,27 @@
 		const makePlaneBack = new THREE.PlaneGeometry(150, 100);
 		const makePlaneFloor = new THREE.PlaneGeometry(150, 300);
 
-		const ceiling = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ color: 0xD0B86F })); //tan
+		const ceiling = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ color: 0xD0B86F }));
 		ceiling.position.y = 100;
 		ceiling.rotateX(Math.PI / 2);
 		scene.add(ceiling);
 
-		const floor = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureFloor })); //grey
+		const floor = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureFloor }));
 		floor.rotateX(-Math.PI / 2);
 		scene.add(floor);
 
-		const wallBack = new THREE.Mesh(makePlaneBack, new THREE.MeshLambertMaterial({ map: textureBack })); //blue
+		const wallBack = new THREE.Mesh(makePlaneBack, new THREE.MeshLambertMaterial({ map: textureBack }));
 		wallBack.position.z = -100;
 		wallBack.position.y = 50;
 		scene.add(wallBack);
 
-		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSide })); //white
+		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSide }));
 		wallRight.position.x = 75;
 		wallRight.position.y = 50;
 		wallRight.rotateY(-Math.PI / 2);
 		scene.add(wallRight);
 
-		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSide })); //white
+		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSide }));
 		wallLeft.position.x = -75;
 		wallLeft.position.y = 50;
 		wallLeft.rotateY(Math.PI / 2);
@@ -264,10 +264,10 @@
 
 					pointerLockControls.getObject().position.y += ( velocity.y * delta ); // new behavior
 
-					if ( pointerLockControls.getObject().position.y < 10 ) {
+					if ( pointerLockControls.getObject().position.y < 50 ) {
 
 						velocity.y = 0;
-						pointerLockControls.getObject().position.y = 10;
+						pointerLockControls.getObject().position.y = 50;
 					}
 				}
 
