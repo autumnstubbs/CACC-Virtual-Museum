@@ -206,41 +206,43 @@
 		const light = new THREE.AmbientLight(0x404040, 4);
 		scene.add(light);
 		
-		// Pedestal One(On the left hand side)
+		// Pedestal One(On the right hand side)
 		const geometryOne = new THREE.BoxGeometry( 20, 80, 20 );
 		const materialOne = new THREE.MeshBasicMaterial( {color: 0x565656} );
 		const pedestalOne = new THREE.Mesh( geometryOne, materialOne );
 		pedestalOne.position.x = 55;
+		pedestalOne.position.z = 70;
 		scene.add( pedestalOne );
 
-		// Places Karaoke on top of Pedestal One
-		const karaokeImg = THREE.ImageUtils.loadTexture( "./loaders/karaoke_club.png" );
-		const karaokeMaterial = new THREE.MeshBasicMaterial( { map: karaokeImg, transparent: true, opacity: 0.9 } );
-		const karaoke = new THREE.Mesh(makePedestalObjPlane, karaokeMaterial);
-		karaoke.position.x = -55;
-		karaoke.position.y = 53;
-		karaoke.position.z = 3;
-		karaoke.rotateY(Math.PI / 2);
-		scene.add(karaoke);
-
-		// Pedestal Two(On the right hand side)
-		const geometryTwo = new THREE.BoxGeometry( 20, 80, 20 );
-		const materialTwo = new THREE.MeshBasicMaterial( {color: 0x565656} );
-		const pedestalTwo = new THREE.Mesh( geometryTwo, materialTwo );
-		pedestalTwo.position.x = -55;
-		scene.add( pedestalTwo );
-
-		// Places Table Tennis on top of Pedestal Two
+		// Places Table Tennis on top of Pedestal One
 		const tabletennisImg = THREE.ImageUtils.loadTexture( "../loaders/tabletennis_club.png" );
 		const tabletennisMaterial = new THREE.MeshBasicMaterial( { map: tabletennisImg, transparent: true, opacity: 0.9 } );
 		const tabletennis = new THREE.Mesh(makePedestalObjPlane, tabletennisMaterial);
 		tabletennis.position.x = 53;
 		tabletennis.position.y = 52;
-		tabletennis.position.z = -1;
+		tabletennis.position.z = 70;
 		tabletennis.rotateY(- Math.PI / 2);
 		scene.add(tabletennis);
 
-		// Pedestal Three(On the right hand side)
+		// Pedestal Two(On the left hand side)
+		const geometryTwo = new THREE.BoxGeometry( 20, 80, 20 );
+		const materialTwo = new THREE.MeshBasicMaterial( {color: 0x565656} );
+		const pedestalTwo = new THREE.Mesh( geometryTwo, materialTwo );
+		pedestalTwo.position.x = -55;
+		pedestalTwo.position.z = -60;
+		scene.add( pedestalTwo );
+
+		// Places Karaoke on top of Pedestal Two
+		const karaokeImg = THREE.ImageUtils.loadTexture( "./loaders/karaoke_club.png" );
+		const karaokeMaterial = new THREE.MeshBasicMaterial( { map: karaokeImg, transparent: true, opacity: 0.9 } );
+		const karaoke = new THREE.Mesh(makePedestalObjPlane, karaokeMaterial);
+		karaoke.position.x = -55;
+		karaoke.position.y = 53;
+		karaoke.position.z = -57;
+		karaoke.rotateY(Math.PI / 2);
+		scene.add(karaoke);
+
+		// Pedestal Three(On the left hand side)
 		const geometryThree = new THREE.BoxGeometry( 20, 80, 20 );
 		const materialThree = new THREE.MeshBasicMaterial( {color: 0x565656} );
 		const pedestalThree = new THREE.Mesh( geometryThree, materialThree );
