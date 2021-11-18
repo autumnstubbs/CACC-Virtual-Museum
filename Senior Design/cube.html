@@ -240,6 +240,24 @@
 		tabletennis.rotateY(- Math.PI / 2);
 		scene.add(tabletennis);
 
+		// Pedestal Three(On the right hand side)
+		const geometryThree = new THREE.BoxGeometry( 20, 80, 20 );
+		const materialThree = new THREE.MeshBasicMaterial( {color: 0x565656} );
+		const pedestalThree = new THREE.Mesh( geometryThree, materialThree );
+		pedestalThree.position.x = -55;
+		pedestalThree.position.z = 70;
+		scene.add( pedestalThree );
+
+		// Places YoYo on top of Pedestal Three
+		const yoyoImg = THREE.ImageUtils.loadTexture( "../loaders/yoyo_club.png" );
+		const yoyoMaterial = new THREE.MeshBasicMaterial( { map: yoyoImg, transparent: true, opacity: 0.9 } );
+		const yoyo = new THREE.Mesh(makePedestalObjPlane, yoyoMaterial);
+		yoyo.position.x = -55;
+		yoyo.position.y = 53;
+		yoyo.position.z = 70;
+		yoyo.rotateY(Math.PI / 2);
+		scene.add(yoyo);
+
 		camera.position.set(0, 55, 150);
 
 		window.onresize = function () {
