@@ -168,7 +168,8 @@
 
 		//wallpapers
 		const textureBack = THREE.ImageUtils.loadTexture( "../loaders/museBack.jpg" );
-		const textureSide = THREE.ImageUtils.loadTexture( "../loaders/museSidesDoor.png" );
+		const textureRight = THREE.ImageUtils.loadTexture( "../loaders/museFramesR.png" );
+		const textureLeft = THREE.ImageUtils.loadTexture( "../loaders/museFramesL.png" );
 		const textureFloor = THREE.ImageUtils.loadTexture( "../loaders/wood.jpg" );
 		const textureCeiling = THREE.ImageUtils.loadTexture( "../loaders/ceiling.jpg" );
 
@@ -191,13 +192,13 @@
 		wallBack.position.y = 50;
 		scene.add(wallBack);
 
-		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSide }));
+		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureRight }));
 		wallRight.position.x = 75;
 		wallRight.position.y = 50;
 		wallRight.rotateY(-Math.PI / 2);
 		scene.add(wallRight);
 
-		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSide }));
+		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureLeft }));
 		wallLeft.position.x = -75;
 		wallLeft.position.y = 50;
 		wallLeft.rotateY(Math.PI / 2);
