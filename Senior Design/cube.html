@@ -41,6 +41,7 @@
 				Click to begin our Virtual Museum Tour
 			</p>
 			<p>
+				View Map: M<br/>
 				Move: WASD<br/>
 				Look: MOUSE<br/>
 				Start Panorama: P<br/>
@@ -107,6 +108,9 @@
 
 		const onKeyDown = function ( event ) {
 			switch ( event.code ) {
+				case 'KeyM':
+					window.location.href = "BasicMap/map.html"
+					break;
 				case 'ArrowUp':
 				case 'KeyW':
 					moveForward = true;
