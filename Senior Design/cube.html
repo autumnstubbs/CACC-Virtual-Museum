@@ -176,9 +176,12 @@
 		const textureLeft = THREE.ImageUtils.loadTexture( "../loaders/museFramesL.png" );
 		const textureFloor = THREE.ImageUtils.loadTexture( "../loaders/wood.jpg" );
 		const textureCeiling = THREE.ImageUtils.loadTexture( "../loaders/ceiling.jpg" );
+		const textureWallDoor = THREE.ImageUtils.loadTexture( "../loaders/museSidesDoor.png" );
+		const textureSides = THREE.ImageUtils.loadTexture( "../loaders/museSides.jpg" );
 
 		const makePlane = new THREE.PlaneGeometry(300, 100);
 		const makePlaneBack = new THREE.PlaneGeometry(150, 100);
+		const makePlaneEntrance = new THREE.PlaneGeometry(300, 100);
 		const makePlaneFloor = new THREE.PlaneGeometry(150, 300);
 		const makePedestalObjPlane = new THREE.PlaneGeometry(30, 30);
 
@@ -196,7 +199,7 @@
 		wallBack.position.y = 50;
 		scene.add(wallBack);
 
-		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureRight }));
+		const wallRight = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSides }));
 		wallRight.position.x = 75;
 		wallRight.position.y = 50;
 		wallRight.rotateY(-Math.PI / 2);
@@ -207,6 +210,105 @@
 		wallLeft.position.y = 50;
 		wallLeft.rotateY(Math.PI / 2);
 		scene.add(wallLeft);
+		
+		const wallEntranceClubs = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureWallDoor }));
+		wallEntranceClubs.position.x = -76;
+		wallEntranceClubs.position.y = 50;
+		wallEntranceClubs.rotateY(-Math.PI / 2);
+		scene.add(wallEntranceClubs);
+
+		const wallEntranceMain = new THREE.Mesh(makePlaneEntrance, new THREE.MeshLambertMaterial({ map: textureWallDoor }));
+		wallEntranceMain.position.z = -150;
+		wallEntranceMain.position.y = 50;
+		wallEntranceMain.position.x = -225;
+		scene.add(wallEntranceMain);
+
+		const wallEntranceEvents = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureWallDoor }));
+		wallEntranceEvents.position.x = -375;
+		wallEntranceEvents.position.y = 50;
+		wallEntranceEvents.rotateY(Math.PI / 2);
+		scene.add(wallEntranceEvents);
+
+		const wallLeftEvents = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSides }));
+		wallLeftEvents.position.x = -525;
+		wallLeftEvents.position.y = 50;
+		wallLeftEvents.rotateY(Math.PI / 2);
+		scene.add(wallLeftEvents);
+
+		const wallRightEvents = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureRight }));
+		wallRightEvents.position.x = -376;
+		wallRightEvents.position.y = 50;
+		wallRightEvents.rotateY(-Math.PI / 2);
+		scene.add(wallRightEvents);
+
+		const wallBackEvents = new THREE.Mesh(makePlaneBack, new THREE.MeshLambertMaterial({ map: textureBack }));
+		wallBackEvents.position.z = -150;
+		wallBackEvents.position.y = 50;
+		wallBackEvents.position.x = -450;
+		scene.add(wallBackEvents);
+
+		const floorEvents = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureFloor }));
+		floorEvents.position.x = -450;
+		floorEvents.rotateX(-Math.PI / 2);
+		scene.add(floorEvents);
+
+		const ceilingEvents = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureCeiling }));
+		ceilingEvents.position.x = -450;
+		ceilingEvents.position.y = 100;
+		ceilingEvents.rotateX(Math.PI / 2);
+		scene.add(ceilingEvents);
+
+		const wallBackMain1 = new THREE.Mesh(makePlaneBack, new THREE.MeshLambertMaterial({ map: textureBack }));
+		wallBackMain1.position.z = -450;
+		wallBackMain1.position.y = 50;
+		wallBackMain1.position.x = -150;
+		scene.add(wallBackMain1);
+
+		const wallBackMain2 = new THREE.Mesh(makePlaneBack, new THREE.MeshLambertMaterial({ map: textureBack }));
+		wallBackMain2.position.z = -450;
+		wallBackMain2.position.y = 50;
+		wallBackMain2.position.x = -300;
+		scene.add(wallBackMain2);
+
+		const wallRightMain = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSides }));
+		wallRightMain.position.x = -76;
+		wallRightMain.position.y = 50;
+		wallRightMain.position.z = -300;
+		wallRightMain.rotateY(-Math.PI / 2);
+		scene.add(wallRightMain);
+
+		const wallLeftMain = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureSides }));
+		wallLeftMain.position.x = -375;
+		wallLeftMain.position.y = 50;
+		wallLeftMain.position.z = -300;
+		wallLeftMain.rotateY(Math.PI / 2);
+		scene.add(wallLeftMain);
+
+		const floorMain = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureFloor }));
+		floorMain.position.x = -300;
+		floorMain.position.z = -300;
+		floorMain.rotateX(-Math.PI / 2);
+		scene.add(floorMain);
+
+		const floorMain2 = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureFloor }));
+		floorMain2.position.x = -150;
+		floorMain2.position.z = -300;
+		floorMain2.rotateX(-Math.PI / 2);
+		scene.add(floorMain2);
+
+		const ceilingMain = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureCeiling }));
+		ceilingMain.position.x = -300;
+		ceilingMain.position.y = 100;
+		ceilingMain.position.z = -300;
+		ceilingMain.rotateX(Math.PI / 2);
+		scene.add(ceilingMain);
+
+		const ceilingMain2 = new THREE.Mesh(makePlaneFloor, new THREE.MeshLambertMaterial({ map: textureCeiling }));
+		ceilingMain2.position.x = -150;
+		ceilingMain2.position.y = 100;
+		ceilingMain2.position.z = -300;
+		ceilingMain2.rotateX(Math.PI / 2);
+		scene.add(ceilingMain2);
 
 		const light = new THREE.AmbientLight(0x404040, 4);
 		scene.add(light);
