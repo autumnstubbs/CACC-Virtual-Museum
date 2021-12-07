@@ -393,7 +393,30 @@
 
 		};
 
+		// Stores the position(x,y,z) of an object after clicking into variables to check which object got clicked 
+		function clickHandler(){
+
+			// Stores the position of an object
+			let x = INTERSECTED.position.x;
+			let y = INTERSECTED.position.y;
+			let z = INTERSECTED.position.z;
+
+			// Now check for object that got clicked using the position
+			if(x == 53 && y == 52 && z == 70){ // Position of Table Tennis 
+				alert("Table Tennis object clicked...");
+			}
+
+			else if(x == -55 && y == 53 && z == 70){ // Position of Yo Yo
+				alert("Yo Yo object clicked...");
+			}
+
+			else if(x == -55 && y == 53 && z == -57){ // Position of Karaoke
+				alert("Karaoke object clicked...");
+			}
+		}
+
 		// Function that actually falls rays of light onto the object that we are seeing currently
+		// Also has a click listener to check which object got clicked
 		function findIntersection() {
 
 			raycaster.setFromCamera(pointer, camera);
@@ -427,6 +450,9 @@
 					}
 		
 					console.log(INTERSECTED.position);
+					console.log(INTERSECTED);
+
+					document.addEventListener("click", clickHandler); // Click Listener for objects in room
 				}
 		
 			} else {
@@ -442,7 +468,7 @@
 						material.color.setHex(INTERSECTED.currentHex);
 					}
 				}
-		
+
 				INTERSECTED = null;
 		
 			}
