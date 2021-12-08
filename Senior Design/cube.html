@@ -187,12 +187,12 @@
 
 		//wallpapers
 		const textureBack = THREE.ImageUtils.loadTexture( "../loaders/museBack.jpg" );
-		const textureRight = THREE.ImageUtils.loadTexture( "../loaders/museFramesR.png" );
-		const textureLeft = THREE.ImageUtils.loadTexture( "../loaders/museFramesL.png" );
+		const textureRight = THREE.ImageUtils.loadTexture( "../loaders/museSidesDoor.png" );
+		const textureLeft = THREE.ImageUtils.loadTexture( "../loaders/museSidesDoor.png" );
 		const textureFloor = THREE.ImageUtils.loadTexture( "../loaders/wood.jpg" );
 		const textureCeiling = THREE.ImageUtils.loadTexture( "../loaders/ceiling.jpg" );
 		const textureWallDoor = THREE.ImageUtils.loadTexture( "../loaders/museSidesDoor.png" );
-		const textureSides = THREE.ImageUtils.loadTexture( "../loaders/museSides.jpg" );
+		const textureSides = THREE.ImageUtils.loadTexture( "../loaders/museSideBlank.png" );
 
 		const makePlane = new THREE.PlaneGeometry(300, 100);
 		const makePlaneBack = new THREE.PlaneGeometry(150, 100);
@@ -220,7 +220,7 @@
 		wallRight.rotateY(-Math.PI / 2);
 		scene.add(wallRight);
 
-		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureLeft }));
+		const wallLeft = new THREE.Mesh(makePlane, new THREE.MeshLambertMaterial({ map: textureWallDoor }));
 		wallLeft.position.x = -75;
 		wallLeft.position.y = 50;
 		wallLeft.rotateY(Math.PI / 2);
@@ -381,6 +381,279 @@
 		yoyo.position.z = 70;
 		yoyo.rotateY(Math.PI / 2);
 		scene.add(yoyo);
+		
+		//frames starting with right wall of hall of clubs
+
+		const frame1Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame1Material = new THREE.MeshBasicMaterial( {map: frame1Img, transparent: true, opacity: 2} );
+		const frame1 = new THREE.Mesh(makePedestalObjPlane, frame1Material);
+		frame1.position.x = 73;
+		frame1.position.y = 62;
+		frame1.position.z = 120;
+		frame1.rotateY(-Math.PI / 2);
+		scene.add(frame1);
+
+		const frame2Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame2Material = new THREE.MeshBasicMaterial( {map: frame2Img, transparent: true, opacity: 2} );
+		const frame2 = new THREE.Mesh(makePedestalObjPlane, frame2Material);
+		frame2.position.x = 73;
+		frame2.position.y = 62;
+		frame2.position.z = 70;
+		frame2.rotateY(-Math.PI / 2);
+		scene.add(frame2);
+
+		const frame3Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame3Material = new THREE.MeshBasicMaterial( {map: frame3Img, transparent: true, opacity: 2} );
+		const frame3 = new THREE.Mesh(makePedestalObjPlane, frame3Material);
+		frame3.position.x = 73;
+		frame3.position.y = 62;
+		frame3.position.z = 20;
+		frame3.rotateY(-Math.PI / 2);
+		scene.add(frame3);
+
+		const frame4Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame4Material = new THREE.MeshBasicMaterial( {map: frame4Img, transparent: true, opacity: 2} );
+		const frame4 = new THREE.Mesh(makePedestalObjPlane, frame4Material);
+		frame4.position.x = 73;
+		frame4.position.y = 62;
+		frame4.position.z = -30;
+		frame4.rotateY(-Math.PI / 2);
+		scene.add(frame4);
+
+		const frame5Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame5Material = new THREE.MeshBasicMaterial( {map: frame5Img, transparent: true, opacity: 2} );
+		const frame5 = new THREE.Mesh(makePedestalObjPlane, frame5Material);
+		frame5.position.x = 73;
+		frame5.position.y = 62;
+		frame5.position.z = -80;
+		frame5.rotateY(-Math.PI / 2);
+		scene.add(frame5);
+
+		//left wall of hall of clubs, starting from back wall
+
+		const frame6Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame6Material = new THREE.MeshBasicMaterial( {map: frame6Img, transparent: true, opacity: 2} );
+		const frame6 = new THREE.Mesh(makePedestalObjPlane, frame6Material);
+		frame6.position.x = -73;
+		frame6.position.y = 75;
+		frame6.position.z = -125;
+		frame6.rotateY(Math.PI / 2);
+		scene.add(frame6);
+
+		const frame7Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame7Material = new THREE.MeshBasicMaterial( {map: frame7Img, transparent: true, opacity: 2} );
+		const frame7 = new THREE.Mesh(makePedestalObjPlane, frame7Material);
+		frame7.position.x = -73;
+		frame7.position.y = 35;
+		frame7.position.z = -125;
+		frame7.rotateY(Math.PI / 2);
+		scene.add(frame7);
+
+		const frame8Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame8Material = new THREE.MeshBasicMaterial( {map: frame8Img, transparent: true, opacity: 2} );
+		const frame8 = new THREE.Mesh(makePedestalObjPlane, frame8Material);
+		frame8.position.x = -73;
+		frame8.position.y = 75;
+		frame8.position.z = 130;
+		frame8.rotateY(Math.PI / 2);
+		scene.add(frame8);
+
+		const frame9Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame9Material = new THREE.MeshBasicMaterial( {map: frame9Img, transparent: true, opacity: 2} );
+		const frame9 = new THREE.Mesh(makePedestalObjPlane, frame9Material);
+		frame9.position.x = -73;
+		frame9.position.y = 32;
+		frame9.position.z = 130;
+		frame9.rotateY(Math.PI / 2);
+		scene.add(frame9);
+
+		const frame10Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame10Material = new THREE.MeshBasicMaterial( {map: frame10Img, transparent: true, opacity: 2} );
+		const frame10 = new THREE.Mesh(makePedestalObjPlane, frame10Material);
+		frame10.position.x = -73;
+		frame10.position.y = 52;
+		frame10.position.z = 90;
+		frame10.rotateY(Math.PI / 2);
+		scene.add(frame10);
+
+		//Frames for hall of events starting with left wall
+
+		const frame11Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame11Material = new THREE.MeshBasicMaterial( {map: frame11Img, transparent: true, opacity: 2} );
+		const frame11 = new THREE.Mesh(makePedestalObjPlane, frame11Material);
+		frame11.position.x = -523;
+		frame11.position.y = 52;
+		frame11.position.z = 70;
+		frame11.rotateY(Math.PI / 2);
+		scene.add(frame11);
+
+		const frame12Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame12Material = new THREE.MeshBasicMaterial( {map: frame12Img, transparent: true, opacity: 2} );
+		const frame12 = new THREE.Mesh(makePedestalObjPlane, frame12Material);
+		frame12.position.x = -523;
+		frame12.position.y = 52;
+		frame12.position.z = 20;
+		frame12.rotateY(Math.PI / 2);
+		scene.add(frame12);
+
+		const frame13Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame13Material = new THREE.MeshBasicMaterial( {map: frame13Img, transparent: true, opacity: 2} );
+		const frame13 = new THREE.Mesh(makePedestalObjPlane, frame13Material);
+		frame13.position.x = -523;
+		frame13.position.y = 52;
+		frame13.position.z = 120;
+		frame13.rotateY(Math.PI / 2);
+		scene.add(frame13);
+
+		const frame14Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame14Material = new THREE.MeshBasicMaterial( {map: frame14Img, transparent: true, opacity: 2} );
+		const frame14 = new THREE.Mesh(makePedestalObjPlane, frame14Material);
+		frame14.position.x = -523;
+		frame14.position.y = 52;
+		frame14.position.z = -30;
+		frame14.rotateY(Math.PI / 2);
+		scene.add(frame14);
+
+		const frame15Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame15Material = new THREE.MeshBasicMaterial( {map: frame15Img, transparent: true, opacity: 2} );
+		const frame15 = new THREE.Mesh(makePedestalObjPlane, frame15Material);
+		frame15.position.x = -523;
+		frame15.position.y = 52;
+		frame15.position.z = -80;
+		frame15.rotateY(Math.PI / 2);
+		scene.add(frame15);
+
+		//right wall, hall of events
+
+		const frame16Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame16Material = new THREE.MeshBasicMaterial( {map: frame16Img, transparent: true, opacity: 2} );
+		const frame16 = new THREE.Mesh(makePedestalObjPlane, frame16Material);
+		frame16.position.x = -378;
+		frame16.position.y = 75;
+		frame16.position.z = -100;
+		frame16.rotateY(-Math.PI / 2);
+		scene.add(frame16);
+
+		const frame17Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame17Material = new THREE.MeshBasicMaterial( {map: frame17Img, transparent: true, opacity: 2} );
+		const frame17 = new THREE.Mesh(makePedestalObjPlane, frame17Material);
+		frame17.position.x = -378;
+		frame17.position.y = 35;
+		frame17.position.z = -100;
+		frame17.rotateY(-Math.PI / 2);
+		scene.add(frame17);
+
+		const frame18Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame18Material = new THREE.MeshBasicMaterial( {map: frame18Img, transparent: true, opacity: 2} );
+		const frame18 = new THREE.Mesh(makePedestalObjPlane, frame18Material);
+		frame18.position.x = -378;
+		frame18.position.y = 52;
+		frame18.position.z = 130;
+		frame18.rotateY(-Math.PI / 2);
+		scene.add(frame18);
+
+		const frame19Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame19Material = new THREE.MeshBasicMaterial( {map: frame19Img, transparent: true, opacity: 2} );
+		const frame19 = new THREE.Mesh(makePedestalObjPlane, frame19Material);
+		frame19.position.x = -378;
+		frame19.position.y = 52;
+		frame19.position.z = 85;
+		frame19.rotateY(-Math.PI / 2);
+		scene.add(frame19);
+
+		//left wall, main room
+
+		const frame20Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame20Material = new THREE.MeshBasicMaterial( {map: frame20Img, transparent: true, opacity: 2} );
+		const frame20 = new THREE.Mesh(makePedestalObjPlane, frame20Material);
+		frame20.position.x = -373;
+		frame20.position.y = 52;
+		frame20.position.z = -300;
+		frame20.rotateY(Math.PI / 2);
+		scene.add(frame20);
+
+		const frame21Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame21Material = new THREE.MeshBasicMaterial( {map: frame21Img, transparent: true, opacity: 2} );
+		const frame21 = new THREE.Mesh(makePedestalObjPlane, frame21Material);
+		frame21.position.x = -373;
+		frame21.position.y = 52;
+		frame21.position.z = -350;
+		frame21.rotateY(Math.PI / 2);
+		scene.add(frame21);
+
+		const frame22Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame22Material = new THREE.MeshBasicMaterial( {map: frame22Img, transparent: true, opacity: 2} );
+		const frame22 = new THREE.Mesh(makePedestalObjPlane, frame22Material);
+		frame22.position.x = -373;
+		frame22.position.y = 52;
+		frame22.position.z = -200;
+		frame22.rotateY(Math.PI / 2);
+		scene.add(frame22);
+
+		const frame28Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame28Material = new THREE.MeshBasicMaterial( {map: frame28Img, transparent: true, opacity: 2} );
+		const frame28 = new THREE.Mesh(makePedestalObjPlane, frame28Material);
+		frame28.position.x = -373;
+		frame28.position.y = 52;
+		frame28.position.z = -250;
+		frame28.rotateY(Math.PI / 2);
+		scene.add(frame28);
+
+		const frame23Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame23Material = new THREE.MeshBasicMaterial( {map: frame23Img, transparent: true, opacity: 2} );
+		const frame23 = new THREE.Mesh(makePedestalObjPlane, frame23Material);
+		frame23.position.x = -373;
+		frame23.position.y = 52;
+		frame23.position.z = -400;
+		frame23.rotateY(Math.PI / 2);
+		scene.add(frame23);
+
+		//right wall, main room
+
+		const frame24Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame24Material = new THREE.MeshBasicMaterial( {map: frame24Img, transparent: true, opacity: 2} );
+		const frame24 = new THREE.Mesh(makePedestalObjPlane, frame24Material);
+		frame24.position.x = -78;
+		frame24.position.y = 52;
+		frame24.position.z = -400;
+		frame24.rotateY(-Math.PI / 2);
+		scene.add(frame24);
+
+		const frame25Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame25Material = new THREE.MeshBasicMaterial( {map: frame25Img, transparent: true, opacity: 2} );
+		const frame25 = new THREE.Mesh(makePedestalObjPlane, frame25Material);
+		frame25.position.x = -78;
+		frame25.position.y = 52;
+		frame25.position.z = -350;
+		frame25.rotateY(-Math.PI / 2);
+		scene.add(frame25);
+
+		const frame26Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame26Material = new THREE.MeshBasicMaterial( {map: frame26Img, transparent: true, opacity: 2} );
+		const frame26 = new THREE.Mesh(makePedestalObjPlane, frame26Material);
+		frame26.position.x = -78;
+		frame26.position.y = 52;
+		frame26.position.z = -300;
+		frame26.rotateY(-Math.PI / 2);
+		scene.add(frame26);
+
+		const frame27Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame27Material = new THREE.MeshBasicMaterial( {map: frame27Img, transparent: true, opacity: 2} );
+		const frame27 = new THREE.Mesh(makePedestalObjPlane, frame27Material);
+		frame27.position.x = -78;
+		frame27.position.y = 52;
+		frame27.position.z = -250;
+		frame27.rotateY(-Math.PI / 2);
+		scene.add(frame27);
+
+		const frame29Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame29Material = new THREE.MeshBasicMaterial( {map: frame29Img, transparent: true, opacity: 2} );
+		const frame29 = new THREE.Mesh(makePedestalObjPlane, frame29Material);
+		frame29.position.x = -78;
+		frame29.position.y = 52;
+		frame29.position.z = -200;
+		frame29.rotateY(-Math.PI / 2);
+		scene.add(frame29);
 
 		camera.position.set(0, 50, 190);
 
