@@ -186,7 +186,7 @@
 		}
 
 		//wallpapers
-		const textureBack = THREE.ImageUtils.loadTexture( "../loaders/museBack.jpg" );
+		const textureBack = THREE.ImageUtils.loadTexture( "../loaders/backWallPlain.png" );
 		const textureRight = THREE.ImageUtils.loadTexture( "../loaders/museSidesDoor.png" );
 		const textureLeft = THREE.ImageUtils.loadTexture( "../loaders/museSidesDoor.png" );
 		const textureFloor = THREE.ImageUtils.loadTexture( "../loaders/wood.jpg" );
@@ -382,6 +382,47 @@
 		yoyo.rotateY(Math.PI / 2);
 		scene.add(yoyo);
 		
+		//frames on back wall, hall of clubs
+
+		const frame1BackImg = THREE.ImageUtils.loadTexture("../loaders/bodyConditioning.png" );
+		const frame1BackMaterial = new THREE.MeshBasicMaterial( {map: frame1BackImg, transparent: true, opacity: 2} );
+		const frame1Back = new THREE.Mesh(makePedestalObjPlane, frame1BackMaterial);
+		frame1Back.position.y = 50;
+		frame1Back.position.z = -147;
+		scene.add(frame1Back);
+
+		const frame2BackImg = THREE.ImageUtils.loadTexture("../loaders/chatLearnClub.png" );
+		const frame2BackMaterial = new THREE.MeshBasicMaterial( {map: frame2BackImg, transparent: true, opacity: 2} );
+		const frame2Back = new THREE.Mesh(makePedestalObjPlane, frame2BackMaterial);
+		frame2Back.position.y = 30;
+		frame2Back.position.z = -147;
+		frame2Back.position.x = -50;
+		scene.add(frame2Back);
+
+		const frame3BackImg = THREE.ImageUtils.loadTexture("../loaders/singDanceClub.png" );
+		const frame3BackMaterial = new THREE.MeshBasicMaterial( {map: frame3BackImg, transparent: true, opacity: 2} );
+		const frame3Back = new THREE.Mesh(makePedestalObjPlane, frame3BackMaterial);
+		frame3Back.position.y = 70;
+		frame3Back.position.z = -147;
+		frame3Back.position.x = -50;
+		scene.add(frame3Back);
+
+		const frame4BackImg = THREE.ImageUtils.loadTexture("../loaders/cookingFrame.png" );
+		const frame4BackMaterial = new THREE.MeshBasicMaterial( {map: frame4BackImg, transparent: true, opacity: 2} );
+		const frame4Back = new THREE.Mesh(makePedestalObjPlane, frame4BackMaterial);
+		frame4Back.position.y = 30;
+		frame4Back.position.z = -147;
+		frame4Back.position.x = 50;
+		scene.add(frame4Back);
+
+		const frame5BackImg = THREE.ImageUtils.loadTexture("../loaders/folkdanceClub.png" );
+		const frame5BackMaterial = new THREE.MeshBasicMaterial( {map: frame5BackImg, transparent: true, opacity: 2} );
+		const frame5Back = new THREE.Mesh(makePedestalObjPlane, frame5BackMaterial);
+		frame5Back.position.y = 70;
+		frame5Back.position.z = -147;
+		frame5Back.position.x = 50;
+		scene.add(frame5Back);
+		
 		//frames starting with right wall of hall of clubs
 
 		const frame1Img = THREE.ImageUtils.loadTexture("../loaders/cookingFrame.png" );
@@ -458,7 +499,7 @@
 		frame8.rotateY(Math.PI / 2);
 		scene.add(frame8);
 
-		const frame9Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame9Img = THREE.ImageUtils.loadTexture("../loaders/taiChi.png" );
 		const frame9Material = new THREE.MeshBasicMaterial( {map: frame9Img, transparent: true, opacity: 2} );
 		const frame9 = new THREE.Mesh(makePedestalObjPlane, frame9Material);
 		frame9.position.x = -73;
@@ -467,7 +508,7 @@
 		frame9.rotateY(Math.PI / 2);
 		scene.add(frame9);
 
-		const frame10Img = THREE.ImageUtils.loadTexture("../loaders/frameG.png" );
+		const frame10Img = THREE.ImageUtils.loadTexture("../loaders/singDanceClub.png" );
 		const frame10Material = new THREE.MeshBasicMaterial( {map: frame10Img, transparent: true, opacity: 2} );
 		const frame10 = new THREE.Mesh(makePedestalObjPlane, frame10Material);
 		frame10.position.x = -73;
